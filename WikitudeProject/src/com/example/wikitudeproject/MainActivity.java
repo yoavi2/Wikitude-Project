@@ -16,26 +16,22 @@ public class MainActivity extends AbstractArchitectCamActivity {
 	
 	@Override
 	protected boolean hasGeo() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	protected boolean hasIR() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String getActivityTitle() {
-		// TODO Auto-generated method stub
 		return "Tar Team";
 	}
 
 	@Override
 	public String getARchitectWorldPath() {
-		// TODO Auto-generated method stub
-		return "samples/3_Point$Of$Interest_4_Selecting$Pois/index.html";
+		return "samples/5_Browsing$Pois_5_Native$Detail$Screen/index.html";
 	}
 
 	@Override
@@ -56,8 +52,7 @@ public class MainActivity extends AbstractArchitectCamActivity {
 
 	@Override
 	public float getInitialCullingDistanceMeters() {
-		// TODO Auto-generated method stub
-		return 1;
+		return 10000;
 	}
 	
 	@Override
