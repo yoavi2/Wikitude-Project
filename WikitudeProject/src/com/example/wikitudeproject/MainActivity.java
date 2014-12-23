@@ -70,6 +70,7 @@ public class MainActivity extends AbstractArchitectCamActivity {
 					Toast.makeText( MainActivity.this, R.string.compass_accuracy_low, Toast.LENGTH_LONG ).show();
 					MainActivity.this.lastCalibrationToastShownTimeMillis = System.currentTimeMillis();
 				}
+				
 			}
 		};
 	}
