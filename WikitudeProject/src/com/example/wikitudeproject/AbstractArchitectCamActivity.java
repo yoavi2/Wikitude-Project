@@ -134,11 +134,11 @@ public abstract class AbstractArchitectCamActivity extends Activity implements A
 					AbstractArchitectCamActivity.this.lastKnownLocaton = location;
 					if ( AbstractArchitectCamActivity.this.architectView != null ) {
 						// check if location has altitude at certain accuracy level & call right architect method (the one with altitude information)
-						if ( location.hasAltitude() && location.hasAccuracy() && location.getAccuracy()<7) {
-							AbstractArchitectCamActivity.this.architectView.setLocation( location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getAccuracy() );
-						} else {
-							AbstractArchitectCamActivity.this.architectView.setLocation( location.getLatitude(), location.getLongitude(), location.hasAccuracy() ? location.getAccuracy() : 1000 );
-						}
+//						if ( location.hasAltitude() && location.hasAccuracy() && location.getAccuracy()<7) {
+							AbstractArchitectCamActivity.this.architectView.setLocation( location.getLatitude(), location.getLongitude(), 0, 5 );
+//						} else {
+//							AbstractArchitectCamActivity.this.architectView.setLocation( location.getLatitude(), location.getLongitude(), location.hasAccuracy() ? location.getAccuracy() : 1000 );
+//						}
 					}
 					}
 				}

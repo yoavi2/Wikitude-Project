@@ -20,8 +20,6 @@ var World = {
 
 	// different POI-Marker assets
 	markerDrawable_idle: null,
-	markerDrawable_idle_green: null,
-	markerDrawable_idle_red: null,
 	markerDrawable_selected: null,
 	markerDrawable_directionIndicator: null,
 
@@ -50,29 +48,84 @@ var World = {
 
 		// start loading marker assets
 		World.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png");
-		World.markerDrawable_idle_green = new AR.ImageResource("assets/marker_idle_green.png");
-		World.markerDrawable_idle_red = new AR.ImageResource("assets/marker_idle_red.png");
 		World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
-		var pointArray = ["גדוד שריון", "כוח חמאס", "טנק מרכבה", "מתקן שיגור"];
-		var enemyArray = ["כוח חמאס", "מתקן שיגור"];
-
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
-		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+		// for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+		// 	var singlePoi = {
+		// 		"id": poiData[currentPlaceNr].id,
+		// 		"latitude": parseFloat(poiData[currentPlaceNr].latitude),
+		// 		"longitude": parseFloat(poiData[currentPlaceNr].longitude),
+		// 		"altitude": parseFloat(poiData[currentPlaceNr].altitude),
+		// 		"title": poiData[currentPlaceNr].name,
+		// 		"description": poiData[currentPlaceNr].description
+		// 	};
 
-			var singlePoi = {
-				"id": poiData[currentPlaceNr].id,
-				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
-				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
-				"altitude": parseFloat((Math.random() * 2000) - 1000),
-				"title": pointArray[currentPlaceNr % 4].toString() + " " + (Math.floor(currentPlaceNr / 4) + 1).toString(),
-				"description": "נקודה " + (currentPlaceNr + 1).toString(),
-				"point_type": ((currentPlaceNr % 2) + 1).toString()
-			};
+		// 	World.markerList.push(new Marker(singlePoi));
+		// }
 
-			World.markerList.push(new Marker(singlePoi));
-		}
+		// CONSTANTS INSTEAD!!!
+		var singlePoi = {
+			"id": (1),
+			"latitude": 32.086156,
+			"longitude": 34.822173,
+			// use this value to ignore altitude information in general - marker will always be on user-level
+			"altitude": AR.CONST.UNKNOWN_ALTITUDE,
+			"title": ("POI#" + (1)),
+			"description": ("POI#" + (1))
+		};
+		World.markerList.push(new Marker(singlePoi));
+
+		var singlePoi = {
+			"id": (2),
+			"latitude": 32.086310,
+			"longitude": 34.821239,
+			// use this value to ignore altitude information in general - marker will always be on user-level
+			"altitude": AR.CONST.UNKNOWN_ALTITUDE,
+			"title": ("POI#" + (2)),
+			"description": ("POI#" + (2))
+		};
+		World.markerList.push(new Marker(singlePoi));
+
+		var singlePoi = {
+			"id": (3),
+			"latitude": 32.086310,
+			"longitude": 34.821261,
+			// use this value to ignore altitude information in general - marker will always be on user-level
+			"altitude": AR.CONST.UNKNOWN_ALTITUDE,
+			"title": ("POI#" + (3)),
+			"description": ("POI#" + (3))
+		};
+		World.markerList.push(new Marker(singlePoi));
+
+		var singlePoi = {
+			"id": (4),
+			"latitude": 32.086301,
+			"longitude": 34.821256,
+			// use this value to ignore altitude information in general - marker will always be on user-level
+			"altitude": AR.CONST.UNKNOWN_ALTITUDE,
+			"title": ("POI#" + (4)),
+			"description": ("POI#" + (4))
+		};
+		World.markerList.push(new Marker(singlePoi));
+
+		var singlePoi = {
+			"id": (5),
+			"latitude": 32.086264,
+			"longitude": 34.821304,
+			// use this value to ignore altitude information in general - marker will always be on user-level
+			"altitude": AR.CONST.UNKNOWN_ALTITUDE,
+			"title": ("POI#" + (5)),
+			"description": ("POI#" + (5))
+		};
+		World.markerList.push(new Marker(singlePoi));
+
+		var currentPlaceNr = 5;
+
+
+
+
 
 		// updates distance information of all placemarks
 		World.updateDistanceToUserValues();
@@ -88,9 +141,6 @@ var World = {
 	updateDistanceToUserValues: function updateDistanceToUserValuesFn() {
 		for (var i = 0; i < World.markerList.length; i++) {
 			World.markerList[i].distanceToUser = World.markerList[i].markerObject.locations[0].distanceToUser();
-
-			var distanceToUserValue = (World.markerList[i].distanceToUser > 999) ? ((World.markerList[i].distanceToUser / 1000).toFixed(2) + " km") : (Math.round(World.markerList[i].distanceToUser) + " m");
-			World.markerList[i].descriptionLabel.text = distanceToUserValue;
 		}
 	},
 
@@ -290,27 +340,28 @@ var World = {
 	requestDataFromServer: function requestDataFromServerFn(lat, lon) {
 
 		// set helper var to avoid requesting places while loading
-		World.isRequestingData = true;
-		World.updateStatusMessage('Requesting places from web-service');
+		// World.isRequestingData = true;
+		// World.updateStatusMessage('Requesting places from web-service');
 
 		// server-url to JSON content provider
-		var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
+		// var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
 
-		var jqxhr = $.getJSON(serverUrl, function(data) {
+		// var jqxhr = $.getJSON(serverUrl, function(data) {
+			 var data = [];
 				World.loadPoisFromJsonData(data);
-			})
-			.error(function(err) {
-				/*
-					In certain circumstances your web service may not be available or other connection issues can occur. 
-					To notify the user about connection problems a status message is updated.
-					In your own implementation you may e.g. use an info popup or similar.
-				*/
-				World.updateStatusMessage("Invalid web-service response.", true);
-				World.isRequestingData = false;
-			})
-			.complete(function() {
-				World.isRequestingData = false;
-			});
+			// })
+			// .error(function(err) {
+				
+					// In certain circumstances your web service may not be available or other connection issues can occur. 
+					// To notify the user about connection problems a status message is updated.
+					// In your own implementation you may e.g. use an info popup or similar.
+				
+			// 	World.updateStatusMessage("Invalid web-service response.", true);
+			// 	World.isRequestingData = false;
+			// })
+			// .complete(function() {
+			// 	World.isRequestingData = false;
+			// });
 	},
 
 	// helper to sort places by distance

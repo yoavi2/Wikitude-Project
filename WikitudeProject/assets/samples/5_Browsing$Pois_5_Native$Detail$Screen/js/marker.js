@@ -18,14 +18,27 @@ function Marker(poiData) {
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
 
     // create an AR.ImageDrawable for the marker in idle state
-    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 2.5, {
+    if (poiData.point_type == 1) {
+        this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle_green, 2.5, {
+            zOrder: 0,
+            opacity: 1.0,
+            /*
+                To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
+            */
+            onClick: Marker.prototype.getOnClickTrigger(this)
+        });
+    }
+    else{
+        this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle_red, 2.5, {
         zOrder: 0,
         opacity: 1.0,
         /*
             To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
         */
         onClick: Marker.prototype.getOnClickTrigger(this)
-    });
+        });
+    }
+
 
     // create an AR.ImageDrawable for the marker in selected state
     this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 2.5, {
